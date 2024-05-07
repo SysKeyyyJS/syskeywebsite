@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SysKeyJS | 1998</title>
+    <link rel="stylesheet" href="assets\css\indexstyle-main.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="author" content="SysKeyJS">
+    <meta name="description" content="Welcome to my site, retrofitted to 1998 style (I can't do CSS.)">
+</head>
+<header style="border: black solid; height: 100px; background: red;">
+    <menu>
+        <div class="dropdown">
+            <img src="assets/imgs/hamburgermenu.png" style="height: 75px; width: 75px; padding: 15px">
+            <div class="dropdown-content">
+                <a href="index.html">Home</a>
+                <a href="aboutme\">About Me</a>
+                <a href="projects\">Projects</a>
+            </div>
+        </div>
+    </menu>
+</header>
+<body>    
+    <div>  
+        <center><img src="assets\imgs\s y s k e y.gif" id="bannerImg"></center>
+        <center><img src="assets\imgs\syskeypfp.png" class="rotate" width="100" height="100"/></center>
+        <center><h2>Welcome to my super cool web site 1!!1!1</h2></center>
+        <center><p>I am SysKey also known as SysPee, SusKey, SlutKey and probabaly a few others, im a sysadmin and I like making stupid stuff</p></center>
+        <center><p>(Yes the design choice is intentionally bad.)</p></center>
+    </div>
+    
+    <center><div>
+        <div class="row">
+            <div class="column">
+                <h5>Monero</h5>
+                <img src="assets\imgs\monerologo.png", id="copyImage", width="50px", height="50px">
+                <input type="text" value="3792750397507059" id="textToCopy" style="display: none;">
+                <script>
+                    // Get references to the image and input field
+                    const image = document.getElementById('copyImage');
+                    const textInput = document.getElementById('textToCopy');
+
+                    // Add a click event listener to the image
+                    image.addEventListener('click', () => {
+                        // Select the text in the input field
+                        textInput.select();
+
+                        // Execute the copy command
+                        document.execCommand('copy');
+
+                        // Unselect the content
+                        window.getSelection().removeAllRanges();
+
+                        // Optionally, provide feedback to the user
+                        alert('Text copied to clipboard!');
+                    });
+                </script>
+            </div>
+            <div class="column">
+                <h5>YouTube</h5>
+                <a href="https://youtube.com/syskeyjs">
+                    <img src="assets\imgs\youtubelogo.png" width="50px", height="50px">
+                </a>
+            </div>
+            <div class="column">
+                <h5>GitHub</h5>
+                <a href="https://github.com/SysKeyyyJS">
+                    <img src="assets\imgs\githublogo.png" width="50px", height="50px">
+                </a>
+            </div>
+            <div class="column">
+                <h5>Discord</h5>
+                <a href="https://discord.com/users/INSERTIDHERE">
+                    <img src="assets\imgs\discordlogo.png" width="50px", height="50px">
+                </a>
+            </div>
+            <div class="column">
+                <h5>SlimeKey Bot</h5>
+                <a href="https://slimekey.xyz/">
+                    <img src="assets\imgs\slimekeylogo.png" width="50px", height="50px">
+                </a>
+            </div>
+        </div>
+    </div></center>
+    <iframe src="assets\audio\sillysong.mp3" allow="autoplay" style="display:none" id="iframeaudio"></iframe>
+</body>
+<footer class="footer", style="border: black solid; height: 200px; background: red">
+    <style>
+        .grid-container {
+          display: grid;
+          grid-template-columns: 15%;
+        }
+        </style>
+    <div class="grid-container">
+        <div>
+            <h4>Contact Me</h4>
+            <h5>Email:   syskeyjs@gmail.com</h5>
+            <h5>Discord:    @syskeyjs</h5>
+        </div>
+    </div>
+</footer>
+</html>
