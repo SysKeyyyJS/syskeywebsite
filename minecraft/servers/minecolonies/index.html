@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horror Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+            text-align: center;
+        }
+        .container {
+            background: #333;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .server-info {
+            margin: 20px 0;
+        }
+        .server-info p {
+            margin: 5px 0;
+            font-size: 1.2em;
+        }
+        .button {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MineColonies Server</h1>
+        <div class="server-info">
+            <p><strong>IP:</strong> REDACTED</p>
+            <p><strong>Port:</strong> 25566</p>
+        </div>
+        <a href="#" id="download-button" class="button">Download</a>
+    </div>
+    <script>
+        // Update the download button URL once it's available
+        document.getElementById('download-button').href = '';
+    </script>
+</body>
+</html>
