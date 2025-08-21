@@ -4,69 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SysKeyyyy</title>
-  <style>
-    :root {
-      --bg-color: white;
-      --text-color: black;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg-color: #121212;
-        --text-color: #f5f5f5;
-      }
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: Arial, sans-serif;
-      transition: background-color 0.3s, color 0.3s;
-      margin: 20px;
-    }
-
-    footer {
-      margin-top: 20px;
-      font-size: 0.9em;
-    }
-
-    .darkmode-toggle {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      padding: 8px 14px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #444;
-      color: #fff;
-      font-size: 14px;
-    }
-
-    .dark {
-      --bg-color: #121212;
-      --text-color: #f5f5f5;
-    }
-
-    .light {
-      --bg-color: white;
-      --text-color: black;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css"> <!-- External CSS -->
 </head>
 <body>
   <button class="darkmode-toggle" id="themeToggle">Toggle Dark Mode</button>
+  
+  <div class="header-container">
+    <h1>👋 Hello! I am SysKey.</h1>
+    <img src="assets\images\profilepic.png" alt="Profile Picture" class="profile-pic">
+  </div>
 
-  <h1>I am SysKey.</h1>
-  <p id="greeting">Loading location...</p> <!-- Greeting shows up here -->
+  <p id="greeting">Loading location...</p>
 
-  <p>
-    Please visit me @ 5002 Circled Oak Dr. Sarasota Florida. Send Pizza. Please.
-  </p>
-  <p>Jeff is a hot and sexy fat assed nigga</p>
-  <p>
-    Please check out my other pals! @ <a href="https://ftg.wtf">ftg.wtf</a>
-  </p>
+  <p>I know a lot about you now! Lets get to know me!</p>
+  <li>
+    I am a member of FTG2085.
+  </li>
+  <li>
+    I like Minecraft, GMOD, GTAV, LSPDFR and some other stuff too.
+  </li>
+  <li>
+    Sometimes I code stuff (like this site)
+  </li>
+  <li>
+    Converting to Orthodox Christianity ☦️
+  </li>
 
   <center>
     <p>Please view this advertisement that I do not get paid to show you.</p>
@@ -80,7 +42,7 @@
       The Fog is Coming. The Fog is Coming. The Fog is Coming. The Fog is Coming. 
       The Fog is Coming. The Fog is Coming. The Fog is Coming. The Fog is Coming. 
     </p>
-    <p id="lineCount"></p> <!-- Line count will go here -->
+    <p id="lineCount"></p>
   </footer>
 
   <script>
