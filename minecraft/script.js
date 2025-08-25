@@ -16,44 +16,94 @@ function typeText(element, text, speed = 20) {
   });
 }
 
-// Reveal all .typed-line elements sequentially
 async function revealSiteContent() {
   const siteContent = document.getElementById("site-content");
   const lines = siteContent.querySelectorAll(".typed-line");
 
   for (const line of lines) {
     line.style.opacity = 1;
-    await typeText(line, line.textContent, 20);
+
+    // 1️⃣ Ad container special case
+    if (line.id === "ad-container") {
+      await typeText(line, "[LOADED advertisement]", 20);
+
+      // Append the iframe after typing
+      const iframe = document.createElement("iframe");
+      iframe.src = line.dataset.iframeSrc;
+      iframe.width = "732";
+      iframe.height = "94";
+      iframe.style.border = "none";
+
+      line.appendChild(document.createElement("br")); // line break
+      line.appendChild(iframe);
+      continue; // done with this line
+    }
+
+    // 2️⃣ Links inside the line
+    const link = line.querySelector("a");
+    if (link) {
+      const fullText = line.textContent;
+      const beforeText = fullText.split(link.textContent)[0];
+      const afterText = fullText.split(link.textContent)[1] || "";
+
+      line.textContent = ""; // clear content
+
+      const spanBefore = document.createElement("span");
+      line.appendChild(spanBefore);
+      await typeText(spanBefore, beforeText, 20);
+
+      line.appendChild(link); // keep link intact
+
+      const spanAfter = document.createElement("span");
+      line.appendChild(spanAfter);
+      await typeText(spanAfter, afterText, 20);
+
+      continue; // done with this line
+    }
+
+    // 3️⃣ Normal line without links or iframe
+    const originalText = line.textContent;
+    line.textContent = "";
+    await typeText(line, originalText, 20);
   }
 
+  // After all lines are typed
   fetchCityGreeting();
   countLinesOfCode();
 }
 
 // Terminal boot simulation
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const terminalText = document.getElementById("terminal-text");
 
   let commands = [
-    "sudo ./runsite",
-    "[Running SysKey site...]"
+    "ls",
+    "index.html  minecraft",
+    "cd minceraft",
+    "ls",
+    "ftgsmp",
+    "cd ftgsmp",
+    "ls",
+    "runpage",
+    "./runpage"
   ];
-  let i = 0;
 
-  function typeNext() {
-    if (i < commands.length) {
-      terminalText.textContent += commands[i] + "\n";
-      i++;
-      setTimeout(typeNext, 1000);
-    } else {
-      setTimeout(() => {
-        document.getElementById("terminal").style.display = "none";
-        revealSiteContent();
-      }, 500);
-    }
+  for (const cmd of commands) {
+    // Create a span so each command types separately
+    const line = document.createElement("div");
+    terminalText.appendChild(line);
+
+    await typeText(line, cmd, 60); // 👈 use the typing effect
+    terminalText.appendChild(document.createElement("br"));
+
+    await new Promise(r => setTimeout(r, 300)); // small pause after each command
   }
 
-  typeNext();
+  // After commands finish, hide terminal and reveal site
+  setTimeout(() => {
+    document.getElementById("terminal").style.display = "none";
+    revealSiteContent();
+  }, 500);
 });
 
 // Fetch location with fallback
