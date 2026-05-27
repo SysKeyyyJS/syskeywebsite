@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    
+    /* Kept your verified custom link background */
+    background-image: url('https://us-east-1.tixte.net/uploads/syskeyjs.tixte.co/syskeyweb_background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat; 
+    background-color: #0b071e; /* Fallback baseline cosmic tone */
+    
+    color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Layer styling for the Interactive Star Engine canvas */
+#space-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none; /* Allows pointer actions to flow through cleanly to UI */
+}
+
+.container {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    width: 90%;
+    margin: 40px auto;
+    position: relative;
+    z-index: 2; /* Forces text layout content over the background star layers */
+}
+
+/* Replaces the orange line with a neon space gradient & pulse animation */
+.accent-line {
+    width: 30px;
+    background: linear-gradient(to bottom, #d900ff, #00d2ff);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(217, 0, 255, 0.5);
+    flex-shrink: 0;
+    animation: lineGlow 4s ease-in-out infinite alternate, slideDown 1s cubic-bezier(0.1, 1, 0.1, 1) forwards;
+}
+
+.main-content {
+    flex: 2;
+    padding: 20px 0;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    background: #1a103c;
+    border: 3px solid #d900ff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 45px;
+    box-shadow: 0 0 20px rgba(217, 0, 255, 0.4);
+    animation: float 6s ease-in-out infinite;
+    
+    /* ADD THIS LINE */
+    overflow: hidden; 
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    /* This makes sure the image scales perfectly without stretching */
+    object-fit: cover; 
+    /* Centers the crop on the middle of the image */
+    object-position: center; 
+}
+
+.text-snow {
+    color: #f2f7ff; /* Crisp snow white */
+    
+    /* Creates a solid 1px black outline around the letters */
+    text-shadow: 
+        -1px -1px 0 #000,  
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000; 
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+    font-size: 3rem;
+    text-shadow: 0 0 15px rgba(217, 0, 255, 0.7);
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #00d2ff;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+.bio {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    max-width: 650px;
+    color: #b0b0b0;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 30px;
+    background: rgba(217, 0, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    border: 2px solid #d900ff;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.2, 1, 0.2, 1);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.btn:hover {
+    background: #d900ff;
+    box-shadow: 0 0 25px rgba(217, 0, 255, 0.8);
+    transform: translateY(-3px);
+}
+
+.side-cards {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Glassmorphism styling for the side cards */
+.card {
+    background: rgba(11, 7, 30, 0.4); /* Solidified opacity profile layer slightly to contrast high detail images */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.4s cubic-bezier(0.2, 1, 0.2, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card:hover {
+    transform: scale(1.03) translateY(-2px);
+    border-color: #00d2ff;
+    box-shadow: 0 15px 30px rgba(0, 210, 255, 0.25);
+}
+
+.card h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #d900ff;
+    margin-top: 0;
+    font-size: 1.8rem;
+    text-shadow: 0 0 10px rgba(217, 0, 255, 0.3);
+}
+
+.card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: #b0b0b0;
+}
+
+.btn-small {
+    padding: 10px 20px;
+    background: #00d2ff;
+    color: #0b071e;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-small:hover {
+    background: #fff;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.8);
+}
+
+/* --- ANIMATION DESIGNS --- */
+
+/* Sequential Entry Animation Container Rules */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cleanEntrance 0.8s cubic-bezier(0.2, 1, 0.2, 1) forwards;
+}
+
+@keyframes cleanEntrance {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from { height: 0%; }
+    to { height: 100%; }
+}
+
+/* Ambient vertical hover motion for profile avatar */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Dynamic pulsing for neon bar */
+@keyframes lineGlow {
+    0% { box-shadow: 0 0 15px rgba(217, 0, 255, 0.4); }
+    100% { box-shadow: 0 0 30px rgba(0, 210, 255, 0.8); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+    .accent-line {
+        width: 100%;
+        height: 15px;
+        margin-bottom: 10px;
+        animation: none; /* Drops compute payload overhead on simple viewports */
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+}
+
+/* --- LAST.FM WIDGET COSMIC STYLING --- */
+
+.lfm-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(11, 7, 30, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.2, 1, 0.2, 1), border-color 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
+}
+
+.lfm-card:hover {
+    transform: scale(1.03) translateY(-2px);
+    border-color: #00d2ff;
+}
+
+.lfm-card.fade {
+    opacity: 0;
+}
+
+/* COVER ART */
+.lfm-card img {
+    width: 85px;
+    height: 85px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+    object-fit: cover;
+}
+
+/* INFO CONTAINER */
+.lfm-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: calc(100% - 105px); /* Forces width containment for structural marquee math */
+}
+
+#lfm-status {
+    font-size: 0.8rem;
+    color: #00d2ff;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+#lfm-artist {
+    font-size: 0.95rem;
+    color: #b0b0b0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* MARQUEE RUNWAY */
+.lfm-marquee {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+#lfm-track {
+    font-family: 'Orbitron', sans-serif;
+    color: #ffffff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.lfm-marquee.scroll #lfm-track {
+    animation: lfm-scroll 8s linear infinite;
+    padding-right: 50%; /* Smooth loop padding transition zone */
+}
+
+@keyframes lfm-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* COSMIC EQUALIZER */
+.lfm-eq {
+    display: flex;
+    gap: 4px;
+    margin-top: 6px;
+    height: 14px;
+}
+
+.lfm-eq span {
+    width: 3px;
+    height: 100%;
+    background: #d900ff; /* Neon Pink fallback tone */
+    opacity: 0.8;
+    transform: scaleY(0.2);
+    transform-origin: bottom;
+}
+
+.lfm-eq.playing span {
+    animation: lfm-eq 1s infinite ease-in-out;
+    background: linear-gradient(to top, #d900ff, #00d2ff); /* Custom themed animated pulse color */
+}
+
+.lfm-eq span:nth-child(2) { animation-delay: 0.15s; }
+.lfm-eq span:nth-child(3) { animation-delay: 0.3s; }
+.lfm-eq span:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes lfm-eq {
+    0%, 100% { transform: scaleY(0.2); }
+    50% { transform: scaleY(1); }
+}

@@ -1,53 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SysKeyyyy</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to SysKey's Space</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-  <!-- Fake Terminal -->
-  <div id="terminal">
-    <pre id="terminal-text"></pre>
-  </div>
 
-  <!-- Actual Site Content -->
-  <div id="site-content">
-    <div class="header-container">
-      <h1 class="typed-line">👋 Hello! I am SysKey.</h1>
-      <h1 class="typed-line">⚠️I was banned off Discord again, new account is @syskeythenatsoc⚠️</h1>
-      <img src="assets\images\profilepic.png" alt="Profile Picture" class="profile-pic typed-line">
+    <canvas id="space-canvas"></canvas>
+
+    <div class="container">
+        <div class="accent-line"></div>
+
+        <div class="main-content">
+            <div class="profile-header fade-in" style="animation-delay: 0.2s;">
+                <div class="profile-pic"><img src="assets/images/3650_syskey.webp"></div>
+                <div>
+                    <h1 class="glow-text">Hello, I'm SysKey!</h1>
+                    <h2 class="subtitle">I do stupid shit | Developer & Professional Racist</h2>
+                </div>
+            </div>
+
+            <div class="bio fade-in" style="animation-delay: 0.4s;">
+                <p class="text-snow">Howdy, I'm SysKeyJS, real name is Mason. I do a lot of stupid computer nerd shit. I use Arch btw.</p>
+                <p class="text-snow">I like to play Minecraft, Hearts of Iron IV, Manor Lords and a few other things probably</p>
+            </div>
+
+            <div class="buttons fade-in" style="animation-delay: 0.6s;">
+                <a href="https://github.com/SysKeyyyJS" class="btn">GitHub</a>
+                <a href="https://x.com/syskeyyyjs" class="btn">Twitter</a>
+                <a href="#" class="btn">Email: syskey@syskeyjs.space</a>
+            </div>
+        </div>
+
+        <div class="side-cards fade-in" style="animation-delay: 0.8s;">
+            <div id="lastfm-widget"></div>
+
+            <div class="card">
+                <h3>My Blog</h3>
+                <p>Coming soon, I think having a blog would be kinda sick.</p>
+                <a href="#" class="btn-small">View More</a>
+            </div>
+            <div class="card">
+                <h3>Projects</h3>
+                <p>Stuff that I am working on right now that I wanna share, might be merged into the blog idk.</p>
+                <a href="#" class="btn-small">View More</a>
+            </div>
+            <div class="card">
+                <h3>About me</h3>
+                <p>Placeholder. A barren rock orbiting a distant star. I have nothing cool to put here yet.</p>
+                <a href="#" class="btn-small">View More</a>
+            </div>
+        </div>
     </div>
 
-    <p id="greeting" class="typed-line">Loading location...</p>
+    <script>
+        const canvas = document.getElementById('space-canvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        const numStars = 120;
+        let mouse = { x: null, y: null, radius: 90 };
 
-    <ul>
-        <li class="typed-line">I am a member of FTG2085.</li>
-        <li class="typed-line">I like Minecraft, GMOD, GTAV, LSPDFR and some other stuff too.</li>
-        <li class="typed-line">Sometimes I code stuff (like this site)</li>
-        <li class="typed-line">I also do networking/IT I love homelabbing.</li>
-        <li class="typed-line">I love metal, Sabaton, Slipknot, Ozzy Osbourne, Kanonenfeiber, Metallica, Pantera etc.</li>
-        <li class="typed-line">Converting to Orthodox Christianity ☦️</li>
-    </ul>
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initStars();
+        }
 
-    <p class="typed-line">
-      Please check out my other pals in FTG2085! 
-      <a href="https://ftg.wtf" class="typed-link">https://ftg.wtf</a>
-    </p>
+        class Star {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.baseX = this.x;
+                this.baseY = this.y;
+                this.size = Math.random() * 4 + 2;
+                this.density = (Math.random() * 15) + 5;
+                this.alpha = Math.random() * 0.5 + 0.5;
+                this.blinkSpeed = Math.random() * 0.02 + 0.005;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+            update() {
+                this.alpha += this.blinkSpeed;
+                if (this.alpha > 1 || this.alpha < 0.2) this.blinkSpeed = -this.blinkSpeed;
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.hypot(dx, dy);
+                if (distance < mouse.radius) {
+                    let forceDirectionX = dx / distance;
+                    let forceDirectionY = dy / distance;
+                    let maxDistance = mouse.radius;
+                    let force = (maxDistance - distance) / maxDistance;
+                    let directionX = forceDirectionX * force * this.density;
+                    let directionY = forceDirectionY * force * this.density;
+                    this.x -= directionX;
+                    this.y -= directionY;
+                } else {
+                    if (this.x !== this.baseX) this.x -= (this.x - this.baseX) / 10;
+                    if (this.y !== this.baseY) this.y -= (this.y - this.baseY) / 10;
+                }
+            }
+        }
 
-    <!-- Ad loading -->
-    <div class="typed-line">Please view this advertisement that I do not get paid to show you.</div>
-    <div class="typed-line" id="ad-container" data-iframe-src="https://slashvertisement.sl4sh.site/get"></div>
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < numStars; i++) stars.push(new Star());
+        }
 
-    <footer class="typed-line">
-      📨Email Me: syskeyjs@ftg.wtf
-      📩FTG2085 Legal Inquiries: legal@ftg.wtf
-      🖥️GitHub: https://github.com/SysKeyyyJS
-      🐔Twitter/X: 
-    </footer>
-  </div>
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < stars.length; i++) {
+                stars[i].update();
+                stars[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
 
-  <script src="script.js"></script>
+        window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        animate();
+    </script>
+
+    <script src="assets/js/widget.js"></script>
 </body>
 </html>
